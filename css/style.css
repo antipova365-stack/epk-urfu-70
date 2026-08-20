@@ -184,6 +184,27 @@ p { line-height: 1.6; color: var(--ink); margin: 0; }
 }
 
 /* ---------- Сквозной сценарий (знак закреплён / носители сменяются) ---------- */
+/* Один зафиксированный на весь экран 3D-слой — общий для #story и #nositeli.
+   Живёт вне .pin-wrap специально: так сцена не пересоздаётся при переходе
+   между "знак" и "носители", объекты в ней просто сменяют друг друга. */
+#scene-host {
+  position: fixed; inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+#scene-host.scene-ready { opacity: 1; }
+#hero-canvas { width: 100%; height: 100%; display: block; }
+.scene-fallback {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  background: radial-gradient(1200px 700px at 72% 30%, var(--orange-soft), var(--white) 65%);
+}
+.scene-fallback img { width: 46%; max-width: 420px; filter: drop-shadow(0 30px 40px rgba(31,78,121,0.18)); }
+
+#scene-track { position: relative; z-index: 1; }
+
 .pin-wrap {
   position: relative;
   height: calc(var(--beats, 4) * 100vh);
@@ -198,18 +219,9 @@ p { line-height: 1.6; color: var(--ink); margin: 0; }
   align-items: center;
   gap: var(--gap);
   overflow: hidden;
-  background:
-    radial-gradient(1100px 600px at 78% 18%, var(--orange-soft), transparent 60%),
-    var(--white);
   padding: 0 clamp(1.25rem, 4vw, 2.5rem);
 }
-.pin-3d { position: relative; height: min(560px, 70vh); }
-#hero-canvas { width: 100%; height: 100%; display: block; touch-action: pan-y; }
-.hero-3d-fallback {
-  position: absolute; inset: 0;
-  display: flex; align-items: center; justify-content: center;
-}
-.hero-3d-fallback img { width: 60%; filter: drop-shadow(0 30px 40px rgba(31,78,121,0.18)); }
+.pin-stage--transparent { background: none; }
 
 .pin-copy { position: relative; height: 100%; display: flex; align-items: center; }
 .pin-beat {
@@ -268,13 +280,21 @@ p { line-height: 1.6; color: var(--ink); margin: 0; }
 
 /* Мобильные — скролл-пиннинг ненадёжен на телефонах, показываем обычным
    вертикальным списком: карточка за карточкой, без фиксации на экране. */
+/* Мобильные: скролл-скраб 3D на телефонах ненадёжен и тяжёл по батарее —
+   показываем статичный знак (fallback-картинку) вместо живой сцены,
+   а текст — обычным вертикальным списком без фиксации на экране. */
 @media (max-width: 900px) {
+  #scene-host { position: absolute; height: 340px; opacity: 1 !important; }
+  #scene-host canvas { display: none; }
+  .scene-fallback { display: flex !important; position: absolute; }
+  #scene-track { position: relative; }
+  #story { margin-top: 340px; }
+
   .pin-wrap { height: auto; }
   .pin-stage {
     position: static; height: auto; min-height: 0;
-    display: flex; flex-direction: column; padding: 5.5rem 1.25rem 1rem;
+    display: block; padding: 1.5rem 1.25rem 1rem;
   }
-  .pin-3d { order: -1; height: 280px; margin-bottom: 0.5rem; }
   .pin-copy { position: static; height: auto; display: block; }
   .pin-beat {
     position: static !important; opacity: 1 !important; transform: none !important;
@@ -282,33 +302,10 @@ p { line-height: 1.6; color: var(--ink); margin: 0; }
   }
   .pin-beat:last-child { border-bottom: none; }
   .pin-progress { display: none; }
-
-  .pin-stage--products {
-    background: none; padding: 5.5rem 1.25rem 1rem;
-    display: flex; flex-direction: column;
-  }
-  .pin-product-media, .pin-stage--products .pin-copy { display: contents; }
-  .pp-img {
-    position: static !important; opacity: 1 !important; transform: none !important;
-    padding: 1.4rem; border-radius: 18px; margin-bottom: 0.9rem;
-    background: linear-gradient(160deg, #FFF6EC, #FCE7D2);
-    max-height: 60vh;
-  }
-  .pin-stage--products .pin-beat {
-    position: static; justify-content: flex-start; padding: 0 0 2rem; margin-bottom: 0.4rem;
-  }
-  .pin-stage--products .pin-beat h2 { color: var(--navy-deep); }
-  .pin-stage--products .pin-beat .lede { color: var(--ink-muted); }
-  .pp-img:nth-of-type(1) { order: 1; } .pin-stage--products .pin-beat:nth-of-type(1) { order: 2; }
-  .pp-img:nth-of-type(2) { order: 3; } .pin-stage--products .pin-beat:nth-of-type(2) { order: 4; }
-  .pp-img:nth-of-type(3) { order: 5; } .pin-stage--products .pin-beat:nth-of-type(3) { order: 6; }
-  .pp-img:nth-of-type(4) { order: 7; } .pin-stage--products .pin-beat:nth-of-type(4) { order: 8; }
-  .pp-img:nth-of-type(5) { order: 9; } .pin-stage--products .pin-beat:nth-of-type(5) { order: 10; }
-  .pp-img:nth-of-type(6) { order: 11; } .pin-stage--products .pin-beat:nth-of-type(6) { order: 12; }
 }
 
 /* ---------- Секции ---------- */
-.section { padding: clamp(4rem, 9vw, 7.5rem) 0; }
+.section { position: relative; z-index: 1; background: var(--white); padding: clamp(4rem, 9vw, 7.5rem) 0; }
 .section.alt { background: var(--paper); }
 .section.orange {
   background: var(--orange);
@@ -438,5 +435,5 @@ p { line-height: 1.6; color: var(--ink); margin: 0; }
 .closing-card .phone { font-size: 1.8rem; font-weight: 700; margin: 0.6rem 0 1.4rem; }
 .closing-card .btn-orange { width: 100%; justify-content: center; }
 
-footer { padding: 2.2rem 0; border-top: 1px solid var(--line); color: var(--ink-muted); font-size: 0.85rem; }
+footer { position: relative; z-index: 1; background: var(--white); padding: 2.2rem 0; border-top: 1px solid var(--line); color: var(--ink-muted); font-size: 0.85rem; }
 footer .wrap { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 0.6rem; }

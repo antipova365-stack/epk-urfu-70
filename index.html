@@ -6,6 +6,14 @@
 <title>ЭПК УрФУ · 70 лет — юбилейная программа</title>
 <meta name="description" content="Юбилейный знак, награды, мерч и оформление праздника к 70-летию ЭПК УрФУ. Анна Тюрина, бренд-дизайн." />
 <link rel="stylesheet" href="css/style.css" />
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+    "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+  }
+}
+</script>
 </head>
 <body>
 
@@ -23,13 +31,18 @@
   </div>
 </nav>
 
+<!-- Один сквозной 3D-слой: знак → ручка → термос. Канвас на весь экран,
+     зафиксирован, пока идут оба сценария ниже (#story + #nositeli). -->
+<div id="scene-host">
+  <canvas id="hero-canvas"></canvas>
+  <div class="scene-fallback"><img src="img/logo-epk.svg" alt="Логотип ЭПК УрФУ" /></div>
+</div>
+
+<div id="scene-track">
+
 <!-- ЗНАК: сквозной сценарий — 3D-объект закреплён на экране, текст сменяется вокруг него -->
 <section class="pin-wrap" id="story" style="--beats:4">
-  <div class="pin-stage">
-    <div class="pin-3d">
-      <canvas id="hero-canvas"></canvas>
-      <div class="hero-3d-fallback"><img src="img/logo-epk.svg" alt="Логотип ЭПК УрФУ" /></div>
-    </div>
+  <div class="pin-stage pin-stage--transparent">
     <div class="pin-copy">
       <div class="pin-beat is-active" data-beat="0">
         <div class="years">1956 — 2026</div>
@@ -70,7 +83,32 @@
   </div>
 </section>
 
-<!-- ЗНАК -->
+<!-- НОСИТЕЛИ: тот же 3D-слой продолжается — объект сменяется с знака на ручку, затем на термос.
+     #story и #nositeli должны идти ВПЛОТНУЮ друг за другом внутри #scene-track — общий прогресс
+     скролла для 3D-сцены считается по их суммарной высоте, ничего постороннего между ними быть
+     не должно (иначе съезжают все пороги переключения знак → ручка → термос). -->
+<section class="pin-wrap" id="nositeli" style="--beats:2">
+  <div class="pin-stage pin-stage--transparent">
+    <div class="pin-copy">
+      <div class="pin-beat is-active" data-beat="0">
+        <div class="eyebrow">Мерч · 01/02</div>
+        <h2>Ручка</h2>
+        <p class="lede">Монохромная версия знака и тонкая инженерная линия по корпусу — версия под
+          лазерную гравировку, дороже выглядит при той же цене тиража.</p>
+      </div>
+      <div class="pin-beat" data-beat="1">
+        <div class="eyebrow">Мерч · 02/02</div>
+        <h2>Термос</h2>
+        <p class="lede">Знак и графичный контур производства на корпусе — носитель, который берут
+          в дорогу и в цех каждый день, а не убирают в шкаф.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+</div><!-- /#scene-track -->
+
+<!-- ЗНАК: подробности — вне сквозного 3D-сценария, обычная статичная секция -->
 <section id="znak" class="section alt">
   <div class="wrap">
     <div class="section-head reveal">
@@ -99,53 +137,29 @@
   </div>
 </section>
 
-<!-- НОСИТЕЛИ: сквозной сценарий — крупные фото сменяют друг друга при скролле -->
-<section class="pin-wrap" id="nositeli" style="--beats:6">
-  <div class="pin-stage pin-stage--products">
-    <div class="pin-product-media">
-      <img class="pp-img is-active" data-beat="0" src="img/nositeli/termos.webp" alt="Термос ЭПК УрФУ · 70 лет" />
-      <img class="pp-img" data-beat="1" src="img/nositeli/bloknot.webp" alt="Блокноты ЭПК УрФУ · 70 лет" />
-      <img class="pp-img" data-beat="2" src="img/nositeli/ruchka.webp" alt="Ручка ЭПК УрФУ · 70 лет" />
-      <img class="pp-img" data-beat="3" src="img/nositeli/ezhednevnik.webp" alt="Ежедневник «70 лет точной работы»" />
-      <img class="pp-img" data-beat="4" src="img/nositeli/kruzhka-fleshka.webp" alt="Кружка и флешка ЭПК УрФУ" />
-      <img class="pp-img" data-beat="5" src="img/nositeli/kalendar.webp" alt="Фотокалендарь «Люди ЭПК»" />
+<!-- Остальные носители — обычной галереей, без 3D (реальные нейросетевые рендеры Анны) -->
+<section class="section alt">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">И ещё</div>
+      <h2>Остальной комплект носителей</h2>
     </div>
-    <div class="pin-copy">
-      <div class="pin-beat is-active" data-beat="0">
-        <div class="eyebrow">Мерч · 01/06</div>
-        <h2>Термос</h2>
-        <p class="lede">Знак и графичный контур производства на корпусе — носитель, который берут
-          в дорогу и в цех каждый день, а не убирают в шкаф.</p>
+    <div class="grid-3 reveal-stagger">
+      <div class="card" style="padding:0;overflow:hidden">
+        <img src="img/nositeli/bloknot.webp" alt="Блокноты" style="width:100%;aspect-ratio:4/3;object-fit:cover" />
+        <div style="padding:1.2rem"><h3 style="margin:0">Блокнот</h3></div>
       </div>
-      <div class="pin-beat" data-beat="1">
-        <div class="eyebrow">Мерч · 02/06</div>
-        <h2>Блокнот</h2>
-        <p class="lede">Твёрдая обложка в двух цветах фирменной палитры, тиснение фирменным паттерном,
-          знак на лицевой стороне.</p>
+      <div class="card" style="padding:0;overflow:hidden">
+        <img src="img/nositeli/ezhednevnik.webp" alt="Ежедневник «70 лет точной работы»" style="width:100%;aspect-ratio:4/3;object-fit:cover" />
+        <div style="padding:1.2rem"><h3 style="margin:0">Ежедневник «70 лет точной работы»</h3></div>
       </div>
-      <div class="pin-beat" data-beat="2">
-        <div class="eyebrow">Мерч · 03/06</div>
-        <h2>Ручка</h2>
-        <p class="lede">Монохромная версия знака и тонкая инженерная линия по корпусу — версия под
-          лазерную гравировку, дороже выглядит при той же цене тиража.</p>
+      <div class="card" style="padding:0;overflow:hidden">
+        <img src="img/nositeli/kruzhka-fleshka.webp" alt="Кружка и флешка" style="width:100%;aspect-ratio:4/3;object-fit:cover" />
+        <div style="padding:1.2rem"><h3 style="margin:0">Кружка и флешка</h3></div>
       </div>
-      <div class="pin-beat" data-beat="3">
-        <div class="eyebrow">Официальные · 04/06</div>
-        <h2>Ежедневник «70 лет точной работы»</h2>
-        <p class="lede">Премиальный формат для руководителей и партнёров — фирменная гравировка
-          и авторская подпись юбилейной кампании.</p>
-      </div>
-      <div class="pin-beat" data-beat="4">
-        <div class="eyebrow">Мерч · 05/06</div>
-        <h2>Кружка и флешка</h2>
-        <p class="lede">Повседневные предметы на рабочем столе — знак читается даже в самом
-          маленьком формате.</p>
-      </div>
-      <div class="pin-beat" data-beat="5">
-        <div class="eyebrow">Официальные · 06/06</div>
-        <h2>Фотокалендарь «Люди ЭПК»</h2>
-        <p class="lede">12 месяцев — 12 сотрудников комбината. Портреты на рабочих местах вместо
-          стоковых картинок: календарь, который действительно вешают на стену.</p>
+      <div class="card" style="padding:0;overflow:hidden">
+        <img src="img/nositeli/kalendar.webp" alt="Фотокалендарь «Люди ЭПК»" style="width:100%;aspect-ratio:4/3;object-fit:cover" />
+        <div style="padding:1.2rem"><h3 style="margin:0">Фотокалендарь «Люди ЭПК»</h3></div>
       </div>
     </div>
   </div>
