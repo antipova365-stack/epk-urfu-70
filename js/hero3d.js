@@ -115,10 +115,11 @@ import * as THREE from "https://unpkg.com/three@0.160.0/build/three.module.js";
 
   let scrollT = 0;
   function onScroll() {
-    const hero = document.querySelector(".hero");
-    if (!hero) return;
-    const rect = hero.getBoundingClientRect();
-    const progress = Math.min(Math.max(-rect.top / (rect.height * 0.9), 0), 1);
+    const story = document.getElementById("story");
+    if (!story) return;
+    const rect = story.getBoundingClientRect();
+    const total = rect.height - window.innerHeight;
+    const progress = total > 0 ? Math.min(Math.max(-rect.top / total, 0), 1) : 0;
     scrollT = progress;
   }
   window.addEventListener("scroll", onScroll, { passive: true });
