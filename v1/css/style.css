@@ -42,7 +42,12 @@
 }
 
 * { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
+html {
+  scroll-behavior: smooth;
+  hanging-punctuation: first allow-end last;
+  text-rendering: optimizeLegibility;
+  font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
+}
 body {
   margin: 0;
   font-family: "Montserrat", -apple-system, sans-serif;
@@ -60,10 +65,14 @@ a { color: inherit; }
 }
 
 /* ---------- Типографика ---------- */
-h1, h2, h3 { margin: 0; font-weight: 700; line-height: 1.12; color: var(--navy-deep); }
-h1 { font-size: clamp(2.4rem, 6vw, 4.6rem); letter-spacing: -0.01em; }
-h2 { font-size: clamp(1.8rem, 4vw, 2.7rem); }
+h1, h2, h3 { margin: 0; font-weight: 700; line-height: 1.12; color: var(--navy-deep); text-wrap: balance; hyphens: none; }
+h1 { font-size: clamp(2.4rem, 6vw, 4.6rem); letter-spacing: -0.03em; line-height: 1.05; }
+h2 { font-size: clamp(1.8rem, 4vw, 2.7rem); letter-spacing: -0.02em; }
 h3 { font-size: clamp(1.15rem, 2vw, 1.4rem); }
+p, li { text-wrap: pretty; hyphens: manual; }
+.price-card .amount, .timeline, .badge-table, table {
+  font-variant-numeric: tabular-nums;
+}
 p { line-height: 1.6; color: var(--ink); margin: 0; }
 .eyebrow {
   display: inline-block;
@@ -102,6 +111,13 @@ p { line-height: 1.6; color: var(--ink); margin: 0; }
   border: 1.5px solid var(--line);
 }
 .btn-outline:hover { border-color: var(--navy); transform: translateY(-2px); }
+.btn-link {
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  color: var(--navy-deep); font-weight: 600; font-size: 0.98rem;
+  text-decoration: none; border-bottom: 1.5px solid var(--line);
+  padding-bottom: 0.2rem; transition: border-color 0.2s, color 0.2s;
+}
+.btn-link:hover { border-color: var(--orange); color: var(--orange-deep); }
 
 /* ---------- Шапка ---------- */
 .nav {
@@ -143,7 +159,7 @@ p { line-height: 1.6; color: var(--ink); margin: 0; }
 .hero-copy .years { font-weight: 600; color: var(--ink-muted); font-size: 1.1rem; margin-bottom: 0.4rem; }
 .hero-copy h1 { margin: 0.2rem 0 1.1rem; }
 .hero-copy h1 .accent { color: var(--orange); }
-.hero-actions { display: flex; gap: 0.9rem; margin-top: 2rem; flex-wrap: wrap; }
+.hero-actions { display: flex; align-items: center; gap: 1.3rem; margin-top: 2rem; flex-wrap: wrap; }
 .hero-date {
   margin-top: 2.2rem;
   display: inline-flex;
@@ -216,7 +232,7 @@ p { line-height: 1.6; color: var(--ink); margin: 0; }
   border-radius: var(--radius);
   padding: 1.9rem;
 }
-.card .num { color: var(--orange); font-weight: 700; font-size: 0.85rem; letter-spacing: 0.08em; }
+.card .num { color: var(--orange); font-weight: 700; font-size: 0.85rem; letter-spacing: 0.08em; text-transform: uppercase; }
 .card h3 { margin: 0.6rem 0 0.6rem; color: var(--navy-deep); }
 .card p { color: var(--ink-muted); font-size: 0.95rem; }
 
