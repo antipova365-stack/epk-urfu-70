@@ -6,14 +6,6 @@
 <title>ЭПК УрФУ · 70&nbsp;лет — юбилейная программа</title>
 <meta name="description" content="Юбилейный знак, награды, мерч и оформление праздника к 70-летию ЭПК УрФУ. Анна Тюрина, бренд-дизайн." />
 <link rel="stylesheet" href="css/style.css" />
-<script type="importmap">
-{
-  "imports": {
-    "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
-    "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
-  }
-}
-</script>
 </head>
 <body>
 
@@ -31,84 +23,53 @@
   </div>
 </nav>
 
-<!-- Один сквозной 3D-слой: знак → ручка → термос. Канвас на весь экран,
-     зафиксирован, пока идут оба сценария ниже (#story + #nositeli). -->
-<div id="scene-host">
-  <canvas id="hero-canvas"></canvas>
-  <div class="scene-fallback"><img src="img/logo-epk.svg" alt="Логотип ЭПК УрФУ" /></div>
-</div>
+<!-- HERO -->
+<header class="hero">
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <div class="years">1956–2026</div>
+      <h1>70&nbsp;лет <span class="accent">ЭПК УрФУ</span></h1>
+      <p class="lede">Юбилейная символика, награды, мерч и&nbsp;оформление праздника&nbsp;— единый знак,
+        который собирает все носители юбилея в&nbsp;один цельный образ предприятия с&nbsp;историей.</p>
+      <div class="hero-actions">
+        <a href="#price" class="btn btn-orange">Смотреть стоимость</a>
+        <a href="#nositeli" class="btn-link">Носители ↓</a>
+      </div>
+      <div class="hero-date">● Юбилей&nbsp;— 10&nbsp;октября 2026</div>
+    </div>
+    <div class="hero-3d">
+      <div class="hero-3d-fallback" style="display:flex"><img src="img/logo-epk-70.png" alt="Юбилейный знак ЭПК УрФУ · 70&nbsp;лет" /></div>
+    </div>
+  </div>
+  <div class="scroll-hint"><span>скролл</span><span class="line"></span></div>
+</header>
 
-<div id="scene-track">
-
-<!-- ЗНАК: сквозной сценарий — 3D-объект закреплён на экране, текст сменяется вокруг него -->
-<section class="pin-wrap" id="story" style="--beats:4">
-  <div class="pin-stage pin-stage--transparent">
-    <div class="pin-copy">
-      <div class="pin-beat is-active" data-beat="0">
-        <div class="years">1956–2026</div>
-        <h1>70&nbsp;лет <span class="accent">ЭПК УрФУ</span></h1>
-        <p class="lede">Юбилейная символика, награды, мерч и&nbsp;оформление праздника&nbsp;— единый знак,
-          который собирает все носители юбилея в&nbsp;один цельный образ предприятия с&nbsp;историей.</p>
-        <div class="hero-actions">
-          <a href="#price" class="btn btn-orange">Смотреть стоимость</a>
-          <a href="#nositeli" class="btn-link">Носители ↓</a>
-        </div>
-        <div class="hero-date">● Юбилей&nbsp;— 10&nbsp;октября 2026</div>
+<!-- ПОЗИЦИОНИРОВАНИЕ -->
+<section class="section">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">Почему это важно</div>
+      <h2>К&nbsp;70-летию комбинату понадобится единый знак даты</h2>
+    </div>
+    <div class="grid-2">
+      <div class="reveal">
+        <p class="lede" style="max-width:none">Юбилей&nbsp;— это&nbsp;не&nbsp;одна дата в&nbsp;календаре, а&nbsp;десятки носителей:
+          грамоты ветеранам, благодарственные письма, памятные знаки, стенд истории, оформление зала,
+          блокноты и&nbsp;ручки сотрудникам, шевроны на&nbsp;спецовку, фотографии, которые останутся в&nbsp;архиве.</p>
+        <p class="lede" style="max-width:none;margin-top:1rem">Если каждый носитель делается отдельно и&nbsp;в&nbsp;спешке,
+          юбилей выглядит как&nbsp;набор случайных файлов. Если есть один знак и&nbsp;правила его применения —
+          всё складывается в&nbsp;цельный образ предприятия с&nbsp;историей.</p>
       </div>
-      <div class="pin-beat" data-beat="1">
-        <div class="eyebrow">Почему это важно</div>
-        <h2>Юбилей&nbsp;— это&nbsp;не&nbsp;одна дата, а&nbsp;десятки носителей</h2>
-        <p class="lede">Грамоты ветеранам, благодарственные письма, памятные знаки, стенд истории,
-          оформление зала, блокноты и&nbsp;ручки сотрудникам, шевроны на&nbsp;спецовку, фотографии, которые
-          останутся в&nbsp;архиве.</p>
-        <p class="lede" style="margin-top:0.8rem">Если каждый носитель делается отдельно и&nbsp;в&nbsp;спешке&nbsp;—
-          юбилей выглядит как&nbsp;набор случайных файлов.</p>
-      </div>
-      <div class="pin-beat" data-beat="2">
-        <div class="eyebrow">Основа всего проекта</div>
-        <h2>Один знак — и&nbsp;все носители собираются сами</h2>
-        <p class="lede">Знак строится на&nbsp;существующем языке ЭПК: оранжевая «У», синяя эмблема
-          с&nbsp;шестернёй. Он живёт рядом с&nbsp;логотипом ЭПК&nbsp;— не&nbsp;заменяет его и&nbsp;не&nbsp;спорит с&nbsp;ним.</p>
-        <p class="lede" style="margin-top:0.8rem"><strong>70&nbsp;лет&nbsp;— это&nbsp;один раз.</strong> Носители
-          останутся в&nbsp;архиве и&nbsp;на&nbsp;стенах дольше, чем сам праздничный день.</p>
-      </div>
-      <div class="pin-beat" data-beat="3">
-        <div class="eyebrow">Один ответственный</div>
-        <h2>Один дизайнер, один знак, 10&nbsp;рабочих дней в&nbsp;типографии</h2>
-        <p class="lede">Я веду проект лично&nbsp;— от&nbsp;эскиза до&nbsp;передачи файлов в&nbsp;печать. Единый визуальный
-          язык на&nbsp;грамоте, блокноте и&nbsp;шевроне сделан одной рукой.</p>
-        <div class="hero-actions"><a href="#znak" class="btn btn-orange">Смотреть версии знака ↓</a></div>
+      <div class="card reveal">
+        <div class="num">70&nbsp;лет&nbsp;— это&nbsp;один раз</div>
+        <p style="color:var(--ink);margin-top:0.6rem">Носители останутся в&nbsp;архиве и&nbsp;на&nbsp;стенах дольше,
+          чем сам праздничный день&nbsp;— их нельзя переделать в&nbsp;спешке через месяц.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- НОСИТЕЛИ: тот же 3D-слой продолжается — объект сменяется с знака на ручку, затем на термос.
-     #story и #nositeli должны идти ВПЛОТНУЮ друг за другом внутри #scene-track — общий прогресс
-     скролла для 3D-сцены считается по их суммарной высоте, ничего постороннего между ними быть
-     не должно (иначе съезжают все пороги переключения знак → ручка → термос). -->
-<section class="pin-wrap" id="nositeli" style="--beats:2">
-  <div class="pin-stage pin-stage--transparent">
-    <div class="pin-copy">
-      <div class="pin-beat is-active" data-beat="0">
-        <div class="eyebrow">Мерч · 01/02</div>
-        <h2>Ручка</h2>
-        <p class="lede">Монохромная версия знака и&nbsp;тонкая инженерная линия по&nbsp;корпусу&nbsp;— версия под
-          лазерную гравировку, дороже выглядит при&nbsp;той же цене тиража.</p>
-      </div>
-      <div class="pin-beat" data-beat="1">
-        <div class="eyebrow">Мерч · 02/02</div>
-        <h2>Термос</h2>
-        <p class="lede">Знак и&nbsp;графичный контур производства на&nbsp;корпусе&nbsp;— носитель, который берут
-          в&nbsp;дорогу и&nbsp;в&nbsp;цех каждый день, а&nbsp;не&nbsp;убирают в&nbsp;шкаф.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-</div><!-- /#scene-track -->
-
-<!-- ЗНАК: подробности — вне сквозного 3D-сценария, обычная статичная секция -->
+<!-- ЗНАК -->
 <section id="znak" class="section alt">
   <div class="wrap">
     <div class="section-head reveal">
@@ -137,31 +98,43 @@
   </div>
 </section>
 
-<!-- Остальные носители — обычной галереей, без 3D (реальные нейросетевые рендеры Анны) -->
-<section class="section alt">
+<!-- НОСИТЕЛИ -->
+<section id="nositeli" class="section">
   <div class="wrap">
     <div class="section-head reveal">
-      <div class="eyebrow">И&nbsp;ещё</div>
-      <h2>Остальной комплект носителей</h2>
+      <div class="eyebrow">Мерч</div>
+      <h2>То, что сотрудник унесёт домой и&nbsp;будет использовать каждый день</h2>
     </div>
-    <div class="grid-3 reveal-stagger">
-      <div class="card" style="padding:0;overflow:hidden">
-        <img src="img/nositeli/bloknot.webp" alt="Блокноты" style="width:100%;aspect-ratio:4/3;object-fit:cover" />
-        <div style="padding:1.2rem"><h3 style="margin:0">Блокнот</h3></div>
+  </div>
+  <div class="wrap">
+    <div class="carriers-rail reveal">
+      <div class="carrier-card">
+        <div class="cc-media"><img class="cc-img" src="img/nositeli/termos.webp" alt="Термокружка ЭПК УрФУ · 70&nbsp;лет" /></div>
+        <div class="cc-face">
+          <div class="cc-tag">Мерч</div>
+          <h3>Термокружка</h3>
+          <p>Знак и&nbsp;графичный контур производства на&nbsp;корпусе&nbsp;— берут в&nbsp;дорогу и&nbsp;в&nbsp;цех каждый день.</p>
+        </div>
       </div>
-      <div class="card" style="padding:0;overflow:hidden">
-        <img src="img/nositeli/ezhednevnik.webp" alt="Ежедневник «70&nbsp;лет точной работы»" style="width:100%;aspect-ratio:4/3;object-fit:cover" />
-        <div style="padding:1.2rem"><h3 style="margin:0">Ежедневник «70&nbsp;лет точной работы»</h3></div>
+      <div class="carrier-card">
+        <div class="cc-media"><img class="cc-img" src="img/nositeli/ruchka.webp" alt="Ручка ЭПК УрФУ · 70&nbsp;лет" /></div>
+        <div class="cc-face">
+          <div class="cc-tag">Мерч</div>
+          <h3>Ручка</h3>
+          <p>Монохромная версия знака, читается на&nbsp;площади 40&nbsp;мм. Вариант под лазерную гравировку.</p>
+        </div>
       </div>
-      <div class="card" style="padding:0;overflow:hidden">
-        <img src="img/nositeli/kruzhka-fleshka.webp" alt="Кружка и флешка" style="width:100%;aspect-ratio:4/3;object-fit:cover" />
-        <div style="padding:1.2rem"><h3 style="margin:0">Кружка и флешка</h3></div>
-      </div>
-      <div class="card" style="padding:0;overflow:hidden">
-        <img src="img/nositeli/kalendar.webp" alt="Фотокалендарь «Люди ЭПК»" style="width:100%;aspect-ratio:4/3;object-fit:cover" />
-        <div style="padding:1.2rem"><h3 style="margin:0">Фотокалендарь «Люди ЭПК»</h3></div>
+      <div class="carrier-card">
+        <div class="cc-media"><img class="cc-img" src="img/nositeli/bloknot.webp" alt="Блокноты ЭПК УрФУ · 70&nbsp;лет" /></div>
+        <div class="cc-face">
+          <div class="cc-tag">Мерч</div>
+          <h3>Блокноты</h3>
+          <p>Твёрдая обложка, знак на&nbsp;лице, первый разворот «70&nbsp;лет. 1956–2026».</p>
+        </div>
       </div>
     </div>
+    <p class="reveal" style="color:var(--ink-muted);font-size:0.86rem;text-align:center;margin-top:1.2rem">Наведите курсор
+      (на&nbsp;телефоне&nbsp;— коснитесь карточки), чтобы увидеть детали.</p>
   </div>
 </section>
 
@@ -283,7 +256,6 @@
   </div>
 </footer>
 
-<script type="module" src="js/hero3d.js"></script>
 <script src="js/main.js"></script>
 </body>
 </html>
